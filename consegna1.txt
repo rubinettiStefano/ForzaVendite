@@ -1,0 +1,24 @@
+- Completare Dipendente
+    - ruolo e seniority come enum
+
+ i ruoli sono:
+ DEVELOPER,
+ HR,
+ PM,
+ TESTER,
+ HELPDESK
+
+ le seniority sono:
+ ENTRY,
+ JUNIOR,
+ MID,
+ SENIOR,
+ SUPERSENIOR
+
+- Completare task
+    - priorita come enum
+        ESTREMA,
+        ALTA,
+        MEDIA,
+        BASSA
+    -Fare check che assegnataIl sia minore uguale a scadeIl
