@@ -16,6 +16,10 @@ import org.hibernate.Transaction;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+//drop database forza_vendite;
+//create database forza_vendite;
+//avviare qui
+
 public class InizializzaDb {
     public static void main(String[] args) {
 
