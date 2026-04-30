@@ -1,15 +1,14 @@
 package entities;
 
+import entities.enums.Seniority;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Check;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
-public class Azienda
-{
+public class Azienda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,8 +21,22 @@ public class Azienda
     private double capitaleSociale;
 
     @OneToMany(mappedBy = "datore", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Dipendente>dipendenti = new ArrayList<>();
+    private List<Dipendente> dipendenti = new ArrayList<>();
 
+    public Map<Seniority, Integer> senioritiesToNumero()
+    {
+        Map<Seniority,Integer> res = new LinkedHashMap<>();
+        for(Seniority s:Seniority.values())
+        {
+            int contatore = 0;
+            for(Dipendente d : dipendenti)
+                if(d.getSeniority()==s)
+                    contatore++;
+
+            res.put(s,contatore);
+        }
+        return res;
+    }
 
     public List<Task> tasksMieiDipendenti()
     {

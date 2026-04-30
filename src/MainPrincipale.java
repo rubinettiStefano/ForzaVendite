@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import repositories.RepositoryAzienda;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class MainPrincipale
@@ -22,7 +23,7 @@ public class MainPrincipale
         ra = new RepositoryAzienda(con);
     }
 
-
+    //stampare aziende con loro distribuzione seniority
     //metodo main
     static void main() {
         init();
@@ -35,12 +36,20 @@ public class MainPrincipale
             switch (cmd)
             {
                 case 1 -> createNewAzienda();
+                case 2 -> distribuzioneSeniorities();
                 case -1 -> System.out.println("BYE BYE");
                 default -> System.out.println("Comando non valido");
             }
 
         }while (cmd!=-1);
     }
+
+    private static void distribuzioneSeniorities()
+    {
+        List<Azienda> tutte = ra.findAll();
+        ia.stampaSeniorities(tutte);
+    }
+
     //metodi di supporto
     private static void createNewAzienda()
     {

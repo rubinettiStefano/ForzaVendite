@@ -1,7 +1,10 @@
 package io;
 
 import entities.Azienda;
+import entities.enums.Seniority;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class IoAzienda extends IoBase
@@ -34,5 +37,21 @@ public class IoAzienda extends IoBase
         a.setCapitaleSociale(inDouble());
 
         return a;
+    }
+
+    public void stampaSeniorities(List<Azienda> tutte)
+    {
+        for(Azienda a : tutte)
+        {
+            Map<Seniority,Integer> mappa = a.senioritiesToNumero();
+            System.out.println("-------------------------");
+            System.out.println("Nome azienda: "+a.getRagioneSociale());
+            for(Seniority s: Seniority.values()) {
+                int numero = mappa.get(s);
+                if(numero!=0)
+                    System.out.println(s + " " +numero);
+            }
+            System.out.println("-------------------------");
+        }
     }
 }
