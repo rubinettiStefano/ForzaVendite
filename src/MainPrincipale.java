@@ -37,11 +37,35 @@ public class MainPrincipale
             {
                 case 1 -> createNewAzienda();
                 case 2 -> distribuzioneSeniorities();
+                case 3 -> cambiaFatturato();
                 case -1 -> System.out.println("BYE BYE");
                 default -> System.out.println("Comando non valido");
             }
 
         }while (cmd!=-1);
+    }
+    //MODIFICA FATTURATO DI SINGOLA AZIENDA
+    private static void cambiaFatturato()
+    {
+        //stampare tutte aziende e loro fatturati -> OUTPUT
+        List<Azienda> tutte = ra.findAll();
+        //potrei farla in io ma la faccio qui perchè sono due righe
+        for(Azienda a : tutte)
+            System.out.println(a.getId() +" "+a.getRagioneSociale()+ " fatturato: "+a.getFatturato());
+        try
+        {
+            Azienda scelta = ia.selezionaAziendaPerId(tutte);
+            System.out.println("Dammi nuovo fatturato");
+            scelta.setFatturato(Double.parseDouble(sc.nextLine()));
+            ra.update(scelta);
+            System.out.println("Fatturato modificato");
+        } catch (RuntimeException e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("SE TI VA RIPROVA COMANDO");
+        }
+        //quale azienda
+        //nuovo fatturato
     }
 
     private static void distribuzioneSeniorities()
@@ -62,3 +86,5 @@ public class MainPrincipale
 
 
 }
+
+

@@ -51,7 +51,21 @@ public class IoAzienda extends IoBase
                 if(numero!=0)
                     System.out.println(s + " " +numero);
             }
-            System.out.println("-------------------------");
         }
+        System.out.println("-------------------------");
+    }
+
+    public Azienda selezionaAziendaPerId(List<Azienda> tutte)
+    {
+        System.out.println("Dammi id dell'azienda");
+        int id = inInt();
+        Azienda res=null;
+        for(Azienda a:tutte)
+            if(a.getId()==id)
+                res=a;
+        if(res==null)
+            throw new RuntimeException("Azienda non esistente");
+
+        return res;
     }
 }
