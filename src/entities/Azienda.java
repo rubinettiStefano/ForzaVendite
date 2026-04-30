@@ -8,7 +8,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Entity
-public class Azienda {
+public class Azienda
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,6 +23,19 @@ public class Azienda {
 
     @OneToMany(mappedBy = "datore", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Dipendente> dipendenti = new ArrayList<>();
+
+    //che tipo deve restituire
+    //di che parametri ha bisogno
+    //che proprietà del this userà -> dipendenti
+    public Dipendente dipendentePiuPagato()
+    {
+        Dipendente piuPagato = dipendenti.get(0);
+        for(Dipendente d : this.dipendenti)
+            if(d.getStipendio()>piuPagato.getStipendio())
+                piuPagato=d;
+
+        return piuPagato;
+    }
 
     public Map<Seniority, Integer> senioritiesToNumero()
     {

@@ -1,6 +1,7 @@
 package repositories;
 
 import entities.Dipendente;
+import entities.enums.Seniority;
 import exceptions.DbException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -72,5 +73,12 @@ public class RepositoryDipendente extends RepositoryBase{
             t.rollback();
             throw new DbException("Delete fallito");
         }
+    }
+
+    public List<Dipendente> filtraPerSeniority(Seniority s)
+    {
+        return con.createQuery("FROM Dipendente WHERE seniority= :val", Dipendente.class)
+                .setParameter("val",s)
+                .getResultList();
     }
 }

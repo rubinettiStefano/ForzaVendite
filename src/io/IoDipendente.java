@@ -4,6 +4,7 @@ import entities.Dipendente;
 import entities.enums.Seniority;
 import entities.enums.TipoContratto;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class IoDipendente extends IoBase
@@ -28,5 +29,15 @@ public class IoDipendente extends IoBase
         }
         res.setSeniority(Seniority.ottieni(sc));
         return res;
+    }
+
+    public void stampaDipendenti(List<Dipendente> dipendentiFiltrati)
+    {
+        System.out.println("--------------");
+        for(Dipendente d: dipendentiFiltrati)
+        {
+            System.out.println(d.getNominativo());
+        }
+        System.out.println("--------------");
     }
 }

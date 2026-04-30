@@ -32,9 +32,20 @@ public class RepositoryAzienda extends RepositoryBase
         return con.createQuery("FROM Azienda", Azienda.class).getResultList();
     }
 
-    /**
-     * Se esiste azienda con id uguale a quello passato come parametro
-     * la restituisce, altrimenti restituisce null
+
+    /*
+        1 - come si chiama -> findById
+        2 - che tipo di valore produce ->
+            un OGGETTO AZIENDA
+        3 - che valori richiede in entrata, parametri, (tipo e nome) ->
+            un Integer chiamato id
+        4 - cosa usa del this (quali proprietà e metodi usa del suo oggetto) ->
+            con, la session
+        5  - per cosa usa la proprietà ->
+         ci richiama il metodo find
+        6 - per cosa usa il parametro ->
+            viene passato come secondo parametro del metodo find
+
      */
     public Azienda findById(Integer id)
     {

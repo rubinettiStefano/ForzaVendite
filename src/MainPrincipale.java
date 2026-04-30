@@ -1,6 +1,7 @@
 import com.generation.database.HibernateUtil;
 import entities.Azienda;
 import entities.Dipendente;
+import entities.enums.Seniority;
 import io.IoAzienda;
 import io.IoDipendente;
 import org.hibernate.Session;
@@ -37,7 +38,7 @@ public class MainPrincipale
     //obiettivo: creare nuovo dipendente
     static void main() {
         init();
-        int cmd = 0;
+        int cmd ;
         do
         {
             System.out.println("Inserisci comando");
@@ -49,11 +50,39 @@ public class MainPrincipale
                 case 2 -> distribuzioneSeniorities();
                 case 3 -> cambiaFatturato();
                 case 4 -> nuovoDipendente();
+                case 5 -> dipendentiPerSeniority();
+                case 6 -> dipendentePiuPagato();
                 case -1 -> System.out.println("BYE BYE");
                 default -> System.out.println("Comando non valido");
             }
 
         }while (cmd!=-1);
+    }
+
+    private static void dipendentePiuPagato()
+    {
+        //stampare il dipendente più pagato di una azienda il cui
+        //id è dato dall'utente
+        System.out.println("Dammi id");
+        int idAzienda = Integer.parseInt(sc.nextLine());
+        //valore
+        //tipo
+        //provenienza
+        //A CHE SCOPO VERRÀ USATO, usarlo per prendere azienda giusta
+        Azienda giusta = ra.findById(idAzienda);
+
+        Dipendente ilPiuPagato = giusta.dipendentePiuPagato();
+        //dobbiamo trovare il dipendente più pagato
+
+        System.out.println("Il dipendente più pagato dell'azienda "+giusta.getRagioneSociale()
+                +" è "+ilPiuPagato.getNominativo()+" con stipendio di "+ilPiuPagato.getStipendio()+" euro mensili");
+    }
+
+    private static void dipendentiPerSeniority()
+    {
+        Seniority s= Seniority.ottieni(sc);
+        List<Dipendente> dipendentiFiltrati = rd.filtraPerSeniority(s);
+        id.stampaDipendenti(dipendentiFiltrati);
     }
 
     private static void nuovoDipendente()
