@@ -1,6 +1,7 @@
 package repositories;
 
 import entities.Azienda;
+import exceptions.DbException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -49,8 +50,47 @@ public class RepositoryAzienda extends RepositoryBase
         } catch (Exception e)
         {
             t.rollback();
+            throw new DbException("Inserimento fallito");
         }
+    }
 
+    public void update(Azienda a)
+    {
+        Transaction t = con.beginTransaction();
+        try {
+            con.merge(a);
+            t.commit();
+        } catch (Exception e)
+        {
+            t.rollback();
+            throw new DbException("Update fallito");
+        }
+    }
+
+    public void delete(Azienda a)
+    {
+        Transaction t = con.beginTransaction();
+        try {
+            con.remove(a);
+            t.commit();
+        } catch (Exception e)
+        {
+            t.rollback();
+            throw new DbException("Delete fallito");
+        }
+    }
+
+    public void delete(Integer id)
+    {
+        Transaction t = con.beginTransaction();
+        try {
+            con.remove(findById(id));
+            t.commit();
+        } catch (Exception e)
+        {
+            t.rollback();
+            throw new DbException("Delete fallito");
+        }
     }
 
 }
