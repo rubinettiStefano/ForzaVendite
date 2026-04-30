@@ -8,7 +8,7 @@ import org.hibernate.annotations.Check;
 import java.time.LocalDate;
 
 @Entity
-@Check(name="controllo DI QUELLI NON IN RITARDO",
+@Check(name="controllo_date",
         constraints = "assegnato_il<=scade_il")
 public class Task
 {
